@@ -12,6 +12,7 @@ using Polarities.Content.Items.Placeable.Relics;
 using Polarities.Content.Items.Placeable.Trophies;
 using Polarities.Content.Items.Consumables.TreasureBags.Hardmode;
 using Polarities.Content.Items.Vanity.Hardmode;
+using Polarities.Content.Items.Weapons.Summon.Flawless;
 using Polarities.Content.Items.Weapons.Ranged.Flawless;
 using Polarities.Content.Projectiles;
 using ReLogic.Content;
@@ -100,7 +101,7 @@ namespace Polarities.Content.NPCs.Bosses.Hardmode.Eclipxie
             notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<BlackLight>(), ItemType<SolarEyeStaff>(), ItemType<Sunsliver>(), ItemType<MoonDisc>(), ItemType<SunDisc>()));
             npcLoot.Add(notExpertRule);
 
-            //npcLoot.Add(ItemDropRule.ByCondition(new FlawlessDropCondition(), ItemType<Contagun>()));
+            npcLoot.Add(ItemDropRule.ByCondition(new FlawlessDropCondition(), ItemType<EclipxieOrb>()));
         }
 
         public static void SpawnOn(Player player)
