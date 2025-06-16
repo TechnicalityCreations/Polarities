@@ -26,8 +26,8 @@ namespace Polarities.Content.Items.Weapons.Magic.Flawless
 			Item.damage = 40;
 			Item.DamageType = DamageClass.Magic;
 			Item.mana = 20;
-			Item.width = 34;
-			Item.height = 34;
+			Item.width = 44;
+			Item.height = 42;
 			Item.useTime = 15;
 			Item.useAnimation = 15;
 			Item.useStyle = 1;

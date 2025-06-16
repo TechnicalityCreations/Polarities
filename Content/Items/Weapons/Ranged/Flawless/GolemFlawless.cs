@@ -26,8 +26,8 @@ namespace Polarities.Content.Items.Weapons.Ranged.Flawless
 		public override void SetDefaults() {
 			Item.damage = 32;
 			Item.DamageType = DamageClass.Ranged;
-			Item.width = 18;
-			Item.height = 18;
+			Item.width = 36;
+			Item.height = 46;
 			Item.maxStack = 1;
 			Item.consumable = false;
 			Item.knockBack = 1f;
@@ -111,7 +111,7 @@ Projectile.velocity.Y += 0.1f;
 
 	public class GolemFlawlessSun : ModProjectile
 	{
-		public override string Texture => "Polarities/Content/NPCs/Bosses/Hardmode/SunPixie/SunPixieArena";
+		public override string Texture => "Polarities/Content/Items/Weapons/Ranged/Flawless/GolemFlawlessSun";
 
 		public override void SetStaticDefaults()
 		{
@@ -122,8 +122,8 @@ Projectile.velocity.Y += 0.1f;
 		public override void SetDefaults()
 		{
 			Projectile.aiStyle = -1;
-			Projectile.width = 2;
-			Projectile.height = 2;
+			Projectile.width = 26;
+			Projectile.height = 26;
 			DrawOffsetX = 0;
 			DrawOriginOffsetY = 0;
 			DrawOriginOffsetX = 0;
@@ -138,7 +138,7 @@ Projectile.velocity.Y += 0.1f;
 
 			Projectile.DamageType = DamageClass.Ranged;
 
-			Projectile.scale = 0.75f;
+			Projectile.scale = 1f;
 		}
 
 		public override void AI()

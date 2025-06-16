@@ -30,8 +30,8 @@ namespace Polarities.Content.Items.Weapons.Ranged.Flawless
         {
             Item.damage = 70;
             Item.DamageType = DamageClass.Ranged;
-            Item.width = 32;
-            Item.height = 32;
+            Item.width = 40;
+            Item.height = 46;
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.useStyle = 1;
@@ -70,8 +70,8 @@ namespace Polarities.Content.Items.Weapons.Ranged.Flawless
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
 
-            Projectile.width = 14;
-            Projectile.height = 27;
+            Projectile.width = 18;
+            Projectile.height = 44;
 
             DrawOffsetX = -2;
             DrawOriginOffsetY = -2;
@@ -189,8 +189,8 @@ namespace Polarities.Content.Items.Weapons.Ranged.Flawless
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
-            Projectile.width = 3;
-            Projectile.height = 6;
+            Projectile.width = 14;
+            Projectile.height = 10;
             Projectile.alpha = 0;
             Projectile.timeLeft = 3600;
             Projectile.penetrate = 2;
