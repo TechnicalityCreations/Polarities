@@ -1390,11 +1390,7 @@ Mods: {
 
 			ShroomiteDartHelmet: {
 				DisplayName: Shroomite Visor
-				Tooltip:
-					'''
-					15% increased dart damage
-					5% increased ranged critical strike chance
-					'''
+				Tooltip: "'Doesn't work anymore, but it does look cool!'"
 			}
 
 			FlawlessMechMask: {
