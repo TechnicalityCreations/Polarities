@@ -186,8 +186,8 @@ namespace Polarities.Content.NPCs.Enemies.HallowInvasion
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Vector2 origin = new Vector2(54, 27);
-            Texture2D texture = TextureAssets.Npc[NPCType<Aequorean>()].Value;
-            Texture2D glowTexture = TextureAssets.Projectile[Type].Value;
+            Texture2D texture = TextureAssets.Npc[Type].Value;
+            Texture2D glowTexture = TextureAssets.Npc[Type].Value;
             Texture2D tentacleTexture = TentaclesTexture.Value;
             const int numTentaclePairs = 3;
 
