@@ -83,7 +83,8 @@ namespace Polarities.Content.Items.Accessories.Combat.Offense.Hardmode
 				Projectile.active = false;
 				return;
 			}
-			if (Core.ModUtils.Contains(player.armor, ItemType<FractalEye>())) Projectile.timeLeft = 2;
+			if (ModUtils.Contains(player.armor, ItemType<FractalEye>())) Projectile.timeLeft = 2;
+			else Projectile.Kill();
 
 			if (player.slotsMinions + Projectile.minionSlots <= player.maxMinions)
             {
@@ -159,7 +160,7 @@ namespace Polarities.Content.Items.Accessories.Combat.Offense.Hardmode
 			Vector2 drawPos = Projectile.Center - Main.screenPosition;
 			Vector2 drawOffset = Vector2.Zero;
 
-			Vector2 eyeDrawOffset = new Vector2(Projectile.width / 2, Projectile.height / 2);
+			Vector2 eyeDrawOffset = new Vector2(17, 17);
 
 			if (Main.mouseLeft)
 			{
