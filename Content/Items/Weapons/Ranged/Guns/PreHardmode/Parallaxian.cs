@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Polarities.Core;
@@ -47,8 +47,11 @@ namespace Polarities.Content.Items.Weapons.Ranged.Guns.PreHardmode
         {
             type = ProjectileType<ParallaxianProjectile>();
 
-            position = player.MountedCenter + (player.MountedCenter - Main.MouseWorld).SafeNormalize(Vector2.Zero).RotatedByRandom(MathHelper.PiOver4) * -100;
-            velocity = (Main.MouseWorld - position).SafeNormalize(Vector2.Zero) * velocity.Length();
+            //position = player.MountedCenter + (player.MountedCenter - Main.MouseWorld).SafeNormalize(Vector2.Zero).RotatedByRandom(MathHelper.PiOver4) * -100;
+            //velocity = (Main.MouseWorld - position).SafeNormalize(Vector2.Zero) * velocity.Length() * Main.rand.NextFloat(0.5f, 1.5f);
+
+            position = Main.MouseWorld + Main.rand.NextVector2Circular(30, 30);
+            velocity = position.DirectionTo(Main.MouseWorld + Main.rand.NextVector2Circular(45, 45)) * velocity.Length() * Main.rand.NextFloat(0.5f, 1.5f);
 
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
 
@@ -70,6 +73,7 @@ namespace Polarities.Content.Items.Weapons.Ranged.Guns.PreHardmode
 			//DisplayName.SetDefault("Parallax Bullet");
 		}
 
+        int trailLength;
 		public override void SetDefaults()
 		{
 			Projectile.width = 4;
@@ -83,6 +87,8 @@ namespace Polarities.Content.Items.Weapons.Ranged.Guns.PreHardmode
 
             Projectile.GetGlobalProjectile<PolaritiesProjectile>().usesGeneralHitCooldowns = true;
             Projectile.GetGlobalProjectile<PolaritiesProjectile>().generalHitCooldownTime = 100;
+
+            trailLength = Main.rand.Next(3, 10);
 		}
 
 		public override void AI()
@@ -96,7 +102,7 @@ namespace Polarities.Content.Items.Weapons.Ranged.Guns.PreHardmode
 
         public override bool? CanDamage()/* tModPorter Suggestion: Return null instead of true */
         {
-            return Math.Abs(15 - Projectile.timeLeft) < 8;
+            return Math.Abs(trailLength * 2 - 1 - Projectile.timeLeft) < 8;
         }
 
         public override void ModifyDamageHitbox(ref Rectangle hitbox)
@@ -112,11 +118,13 @@ namespace Polarities.Content.Items.Weapons.Ranged.Guns.PreHardmode
 			Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
 			Rectangle frame = texture.Frame();
 
-			for (int i = -8; i <= 8; i++)
+			for (int i = -trailLength; i <= trailLength; i++)
 			{
-				float motion = 15 - Projectile.timeLeft - i;
-				float alpha = Math.Max(0, 1 - (15 - Projectile.timeLeft - i) * (15 - Projectile.timeLeft - i) / 15f / 15f) * (8 - i) / 16f;
-				float scale = (1 + Projectile.ai[0] * (15 - Projectile.timeLeft - i) / 15f) * (8 - i) / 16f;
+                float fullTrailSize = trailLength * 2 - 1;
+
+                float motion = fullTrailSize - Projectile.timeLeft - i;
+				float alpha = Math.Max(0, 1 - (fullTrailSize - Projectile.timeLeft - i) * (fullTrailSize - Projectile.timeLeft - i) / fullTrailSize / fullTrailSize) * (8 - i) / 16f;
+				float scale = (1 + Projectile.ai[0] * (fullTrailSize - Projectile.timeLeft - i) / fullTrailSize) * (8 - i) / 16f;
 
 				Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + Projectile.velocity * motion, frame, Color.White * alpha, Projectile.velocity.ToRotation(), new Vector2(1, 1), new Vector2(Projectile.velocity.Length(), scale), SpriteEffects.None, 0f);
 			}
