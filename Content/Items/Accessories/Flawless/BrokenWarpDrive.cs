@@ -50,7 +50,15 @@ namespace Polarities.Content.Items.Accessories.Flawless
 				Vector2 position = info.PositionInTiles.ToWorldCoordinates(8f, 8f) - new Vector2(0f, (float)player.HeightOffsetBoost);
 				player.Teleport(position, TeleportationStyleID.TeleportationPylon, (int)info.TypeOfPylon);
 				player.velocity = Vector2.Zero;
+
+				// spawn dust line above player
+    				for (int i = 0; i < 100; i++)
+				{
+    					Vector2 dustPos = Vector2.Lerp(player.Center + new Vector2(0, -player.Height / 2), player.Center + new Vector2(0, (player.Height + Main.screenHeight) / -2), i / 100f);
+	 				Dust.NewDustPerfect(dustPos, DustID.Electric).velocity = Vector2.Zero;
+    				}
 			}
+   			else orig(sys, info, playerIndex);
 		}
 	}
 }
