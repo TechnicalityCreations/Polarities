@@ -72,8 +72,8 @@ namespace Polarities.Content.Items.Placeable.Furniture.Fractal
 
             if (tile.TileFrameX < 66)
             {
-                r = 0.0f;
-                g = 0.0f;
+                r = 0.851f;
+                g = 1.167f;
                 b = 1.2f;
             }
         }
