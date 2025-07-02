@@ -1,7 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Polarities.Core;
 using Polarities.Content.Buffs.Hardmode;
 
 namespace Polarities.Content.Items.Placeable.Blocks.Fractal
@@ -72,6 +73,26 @@ namespace Polarities.Content.Items.Placeable.Blocks.Fractal
         public override bool CanExplode(int i, int j)
         {
             return false;
+        }
+
+        public override void FloorVisuals(Player player)
+        {
+            Vector2 oldCenter = player.Center;
+            for (int i = 0; i < 256; i++)
+            {
+                Vector2 newPosition = player.position + Main.rand.NextVector2Circular(400, 400);
+                if (ModUtils.IsPositionPlayerSafe(newPosition))
+                {
+                    player.Teleport(newPosition, TeleportationStyleID.DebugTeleport);
+                    for (int j = 0; j < 20; j++)
+                    {
+                        Vector2 dustPos = Vector2.Lerp(oldCenter, player.Center, j / 20f);
+                        Dust.NewDustPerfect(dustPos, DustID.Electric, Velocity: Vector2.Zero).noGravity = true;
+                    }
+                    break;
+                }
+            }
+            base.FloorVisuals(player);
         }
 
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
