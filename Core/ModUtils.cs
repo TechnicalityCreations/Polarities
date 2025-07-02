@@ -48,6 +48,21 @@ namespace Polarities.Core
             return false;
         }
 
+        public static bool IsPositionPlayerSafe(Vector2 position)
+        {
+            // checks if the 2x3 box with top-left at position is not obstructed
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    int x = (int)(position.X / 16) + i;
+                    int y = (int)(position.Y / 16) + j;
+                    if (Main.tile[x, y].HasTile) return false;
+                }
+            }
+            return true;
+        }
+
         public static void Load()
         {
             try
