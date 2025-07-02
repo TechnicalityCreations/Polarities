@@ -54,7 +54,7 @@ namespace Polarities.Content.Items.Accessories.Flawless
 				// spawn dust line above player
     				for (int i = 0; i < 100; i++)
 				{
-    					Vector2 dustPos = Vector2.Lerp(player.Center + new Vector2(0, -player.Height / 2), player.Center + new Vector2(0, (player.Height + Main.screenHeight) / -2), i / 100f);
+    					Vector2 dustPos = Vector2.Lerp(player.Center + new Vector2(0, -player.height / 2), player.Center + new Vector2(0, (player.height + Main.screenHeight) / -2), i / 100f);
 	 				Dust.NewDustPerfect(dustPos, DustID.Electric).velocity = Vector2.Zero;
     				}
 			}
