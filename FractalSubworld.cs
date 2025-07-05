@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Polarities.Content.Biomes.Fractal;
 using Polarities.Content.Buffs.Hardmode;
 using Polarities.Content.Items.Placeable.Bars;
@@ -100,6 +100,27 @@ namespace Polarities
         }
 
         public override string ToString() => $"{num} / {den}";
+    }
+
+    public partial class StandardIssueTeleports : GlobalItem
+    {
+        public override bool InstancePerEntity => true;
+
+        public override bool? UseItem(Item item, Player player)
+        {
+            if (item.type == ItemID.MagicMirror
+             || item.type == ItemID.IceMirror
+             || item.type == ItemID.CellPhone
+             || item.type == ItemID.Shellphone
+             || item.type == ItemID.ShellphoneDummy
+             || item.type == ItemID.ShellphoneHell
+             || item.type == ItemID.ShellphoneOcean
+             || item.type == ItemID.ShellphoneSpawn)
+            {
+                FractalSubworld.DoExit();
+            }
+            return base.UseItem(item, player);
+        }
     }
 
     public class FractalSubworld : Subworld
