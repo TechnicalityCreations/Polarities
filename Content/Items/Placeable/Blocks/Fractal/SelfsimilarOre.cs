@@ -91,8 +91,8 @@ namespace Polarities.Content.Items.Placeable.Blocks.Fractal
 
             	Vector2 worldPosition = SelfsimilarSentinel.GetNearestArenaPosition(position);
 
-            	//if we're in an arena, fail and count up to your DOOM
-            	if ((worldPosition - position).Length() < SelfsimilarSentinel.ARENA_RADIUS && !effectOnly)
+                //if we're in an arena, fail and count up to your DOOM
+                if ((worldPosition - position).Length() < SelfsimilarSentinel.ARENA_RADIUS && !effectOnly)
             	{
             		fail = true;
 

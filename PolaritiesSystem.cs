@@ -34,6 +34,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.WorldBuilding;
 using static Terraria.ModLoader.ModContent;
+using System.Linq;
 
 namespace Polarities
 {
@@ -246,9 +247,9 @@ namespace Polarities
         public override void OnWorldLoad()
         {
             DrawCacheProjsBehindWalls.Clear();
-            sentinelCaves?.Clear();
-            sentinelCaveVars?.Clear();
-            sentinelCaveRots?.Clear();
+            //sentinelCaves?.Clear();
+            //sentinelCaveVars?.Clear();
+            //sentinelCaveRots?.Clear();
 
             downedStormCloudfish = false;
             downedStarConstruct = false;
@@ -352,6 +353,14 @@ namespace Polarities
 
             if (disabledEvilSpread) tag["disabledEvilSpread"] = true;
             if (disabledHallowSpread) tag["disabledHallowSpread"] = true;
+
+            //Save sentinel caves
+            if (sentinelCaves != null)
+            {
+                tag.Add("sentinelCaves", sentinelCaves);
+                tag.Add("sentinelCaveVars", sentinelCaveVars);
+                tag.Add("sentinelCaveRots", sentinelCaveRots);
+            }
         }
 
         public override void LoadWorldData(TagCompound tag)
@@ -383,6 +392,14 @@ namespace Polarities
 
             disabledHallowSpread = tag.ContainsKey("disabledHallowSpread");
             disabledEvilSpread = tag.ContainsKey("disabledEvilSpread");
+
+            //Load sentinel caves
+            if (tag.ContainsKey("sentinelCaves"))
+            {
+                sentinelCaves = tag.GetList<Vector2>("sentinelCaves").ToList();
+                sentinelCaveVars = tag.GetList<Vector2>("sentinelCaveVars").ToList();
+                sentinelCaveRots = tag.GetList<double>("sentinelCaveRots").ToList();
+            }
         }
 
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
