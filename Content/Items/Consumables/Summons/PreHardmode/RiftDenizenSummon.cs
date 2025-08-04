@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Polarities.Core;
 using Polarities.Global;
@@ -48,11 +48,11 @@ namespace Polarities.Content.Items.Consumables.Summons.PreHardmode
 			return !NPC.AnyNPCs(NPCType<RiftDenizen>()) && player.ownedProjectileCounts[Item.shoot] == 0;
 		}
 
-		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+		/*public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-            NPC.SpawnOnPlayer(player.whoAmI, NPCType<RiftDenizen>());
-            return true;
-		}
+			NPC.SpawnOnPlayer(player.whoAmI, NPCType<RiftDenizen>());
+			return true;
+		}*/
 	}
 
 	public class RiftDenizenSummonProjectile : ModProjectile
@@ -78,10 +78,11 @@ namespace Polarities.Content.Items.Consumables.Summons.PreHardmode
 			Projectile.hide = true;
 		}
 
-		//public override void Kill(int timeLeft)
-		//{
-			//Player player = Main.player[Projectile.owner];
-        //}
+		public override void Kill(int timeLeft)
+		{
+			Player player = Main.player[Projectile.owner];
+			NPC.SpawnOnPlayer(player.whoAmI, NPCType<RiftDenizen>());
+		}
 
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {

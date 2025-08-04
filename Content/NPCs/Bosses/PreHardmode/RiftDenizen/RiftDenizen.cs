@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Polarities.Global;
 using Polarities.Core;
@@ -104,7 +104,6 @@ namespace Polarities.Content.NPCs.Bosses.PreHardmode.RiftDenizen
             
             //normal mode loot
             npcLoot.Add(ItemDropRule.Common(ItemType<FractalAssembler>(), 1));
-            npcLoot.Add(ItemDropRule.Common(ItemType<FractalAltar>(), 1));//TEMP DELETE WHEN IT GENERATES
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
             notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<RiftDenizenMask>(), 7));
             notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<EndlessHook>(), ItemType<DimensionalAnchor>()));
