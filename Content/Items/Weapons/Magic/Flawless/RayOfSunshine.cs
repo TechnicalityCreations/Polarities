@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Polarities.Core;
 using Polarities.Global;
@@ -89,7 +89,7 @@ namespace Polarities.Content.Items.Weapons.Magic.Flawless
         {
             SoundEngine.PlaySound(SoundID.Zombie104, Main.MouseWorld);
             //player.GetModPlayer<PolaritiesPlayer>().AddScreenShake(30, 1);
-            //player.GetModPlayer<PolaritiesPlayer>().screenshakeMagnitude = 30;
+            //player.GetModPlayer<PolaritiesPlayer>().screenshakeMagnitude = 3;
             //player.GetModPlayer<PolaritiesPlayer>().screenshakeTimer = 240; // 4 seconds
             Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI);
             return false;
@@ -125,6 +125,7 @@ namespace Polarities.Content.Items.Weapons.Magic.Flawless
             Player projOwner = Main.player[Projectile.owner];
             projOwner.GetModPlayer<PolaritiesPlayer>().screenshakeMagnitude = 3;
             projOwner.GetModPlayer<PolaritiesPlayer>().screenshakeTimer = 6;
+
 
             Projectile.rotation = -MathHelper.PiOver2;
 
