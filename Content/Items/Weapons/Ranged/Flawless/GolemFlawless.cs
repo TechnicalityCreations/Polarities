@@ -82,7 +82,7 @@ namespace Polarities.Content.Items.Weapons.Ranged.Flawless
 				sun.position = Projectile.position + Projectile.velocity;
 				sun.velocity = Projectile.velocity / 2;
 			}
-            Dust d = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Firework_Yellow, Scale: 1f)];
+            Dust d = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, Scale: 1f)];
             d.noGravity = true;
             d.velocity /= 4;
 
@@ -143,11 +143,12 @@ Projectile.velocity.Y += 0.1f;
 
 		public override void AI()
 		{
-			Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Firework_Yellow, Scale: 0.75f)].noGravity = true;
+			Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, Scale: 0.75f)].noGravity = true;
 
 			foreach (NPC npc in Main.npc)
             {
 				if (!npc.active) continue;
+				if (!npc.friendly) continue;
 				if (npc.life <= 0) continue;
 				if (npc.Distance(Projectile.position) > 210) continue;
 				npc.AddBuff(BuffID.OnFire3, 10);
@@ -186,7 +187,7 @@ Projectile.velocity.Y += 0.1f;
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Firework_Yellow, Scale: 1f).noGravity = true;
+				Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, Scale: 1f).noGravity = true;
 			}
 		}
 
@@ -212,7 +213,7 @@ Projectile.velocity.Y += 0.1f;
 					scale *= Projectile.timeLeft / 30f;
 				}
 
-				Main.spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, 64, 64), color * alpha, rotation, new Vector2(32, 32), Projectile.scale * scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+				Main.spriteBatch.Draw(TextureAssets.Sun.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, 64, 64), color * alpha, rotation, new Vector2(32, 32), Projectile.scale * scale, Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
 			}
 			for (int i = 0; i < numDraws; i++)
 			{
@@ -228,7 +229,7 @@ Projectile.velocity.Y += 0.1f;
 				}
 				if (Projectile.timeLeft > 15)
 				{
-					Main.spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, 64, 64), color * alpha, rotation, new Vector2(32, 32), Projectile.scale * scale, Projectile.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
+					Main.spriteBatch.Draw(TextureAssets.Sun.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, 64, 64), color * alpha, rotation, new Vector2(32, 32), Projectile.scale * scale, Projectile.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
 				}
 			}
 
