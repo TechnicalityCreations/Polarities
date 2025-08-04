@@ -77,20 +77,17 @@ namespace Polarities.Content.Items.Weapons.Ranged.Flawless
 
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-
-            Projectile.NewProjectile(source, position, velocity, type == ProjectileID.WoodenArrowFriendly ? ProjectileType<BeyondBowProjectile>() : type, damage, knockback, player.whoAmI);
-            
 			//if (type == ProjectileID.WoodenArrowFriendly)
             //{
 				//type = ProjectileType<BeyondBowProjectile>();
             //}
 
-            float lineDistance = 40f;
+            float lineDistance = 70f;
             float lineRadius = Math.Min(62f, chargeTime / 20f) * 16f / 20f;
             float angleVariance = 400f / (chargeTime + 400f);
 
             position = player.Center + new Vector2(velocity.X, velocity.Y).SafeNormalize(Vector2.Zero) * lineDistance + new Vector2(-velocity.Y, velocity.X).SafeNormalize(Vector2.Zero) * lineRadius * (float)Math.Sin(chargeParity * MathHelper.Pi + chargeTime / 40f);
-            Vector2 speed = ((Main.MouseWorld - position).SafeNormalize(Vector2.Zero) * new Vector2(velocity.X, velocity.Y).Length()).RotatedBy(angleVariance * (float)Math.Sin(chargeParity * MathHelper.Pi + chargeTime / 40f));
+            Vector2 speed = ((Main.MouseWorld - position).SafeNormalize(Vector2.Zero) * new Vector2(velocity.X, velocity.Y).Length()).RotatedByRandom(angleVariance * (float)Math.Sin(chargeParity * MathHelper.Pi + chargeTime / 40f));
 
             position -= speed * 2;
 
@@ -99,7 +96,9 @@ namespace Polarities.Content.Items.Weapons.Ranged.Flawless
 
             chargeParity = (chargeParity + 1) % 2;
 
-            return true;
+            Projectile.NewProjectile(source, position, velocity, type == ProjectileID.WoodenArrowFriendly ? ProjectileType<BeyondBowProjectile>() : type, damage, knockback, player.whoAmI);
+
+            return false;
         }
 
 		public override Vector2? HoldoutOffset()
@@ -136,13 +135,15 @@ namespace Polarities.Content.Items.Weapons.Ranged.Flawless
 
 			if (Main.myPlayer == Projectile.owner)
 			{
-				Projectile.Center = projOwner.Center + (Main.MouseWorld - projOwner.Center).SafeNormalize(Vector2.Zero) * 32f;
+				Projectile.Center = projOwner.MountedCenter + projOwner.DirectionTo(Main.MouseWorld) * 60f;
 				Projectile.rotation = (Main.MouseWorld - projOwner.Center).ToRotation();
 			}
 			Projectile.netUpdate = true;
 
 			Projectile.timeLeft = 2;
 			Projectile.localAI[0]++;
+
+			Projectile.velocity = Vector2.Zero;
 		}
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

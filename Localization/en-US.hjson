@@ -5225,6 +5225,7 @@ Mods: {
 			Asteroid.DisplayName: Asteroid
 			PolaritiesTeleportBeam.DisplayName: Polarities Teleport Beam
 			SunplateDrillProj.DisplayName: Sunplate Drill Proj
+			RiftBeam.DisplayName: Rift Beam
 		}
 
 		Bestiary: {
