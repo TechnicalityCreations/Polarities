@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 
 namespace Polarities.Content.Biomes.Fractal
 {   public class FractalBiome : ModBiome
@@ -20,6 +21,9 @@ namespace Polarities.Content.Biomes.Fractal
         public override string BestiaryIcon => "Polarities/Content/Biomes/Fractal/FractalBestiaryIcon";
 
         public override int Music => MusicLoader.GetMusicSlot(Mod, "Assets/Sounds/Music/FractalPalace");
+
+        public override ModWaterStyle WaterStyle => GetInstance<FractalWaterStyle>();
+        public override int BiomeTorchItemType => ItemType<Items.Placeable.Furniture.Fractal.FractalTorch>();
 
         public override void Load()
         {
