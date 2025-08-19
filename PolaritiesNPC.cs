@@ -141,6 +141,14 @@ namespace Polarities
             }
         }
 
+        public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
+        {
+            if (FractalSubworld.Active && pool.ContainsKey(0))
+            {
+                pool[0] = 0f;
+            }
+        }
+
         private void Main_DrawInfoAccs(ILContext il)
         {
             ILCursor c = new ILCursor(il);
@@ -1071,6 +1079,7 @@ namespace Polarities
                 case NPCID.DD2Betsy:
                     npcLoot.Add(ItemDropRule.ByCondition(new FlawlessDropCondition(), ItemType<WyvernsNest>()));
                     break;
+
                 case NPCID.MartianSaucerCore:
                     npcLoot.Add(ItemDropRule.ByCondition(new FlawlessDropCondition(), ItemType<BrokenWarpDrive>()));
                     break;
