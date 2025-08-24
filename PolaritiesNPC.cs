@@ -1083,6 +1083,10 @@ namespace Polarities
                 case NPCID.MartianSaucerCore:
                     npcLoot.Add(ItemDropRule.ByCondition(new FlawlessDropCondition(), ItemType<BrokenWarpDrive>()));
                     break;
+
+                case NPCID.IceQueen:
+                    npcLoot.Add(ItemDropRule.ByCondition(new FlawlessDropCondition(), ItemType<ColdShoulder>()));
+                    break;
             }
 
             //replace trophies and master pets
@@ -1233,4 +1237,5 @@ namespace Polarities
         }
     }
 }
+
 
